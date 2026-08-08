@@ -1,7 +1,7 @@
 {
-  "name": "LÀ ? — Maintenant",
-  "short_name": "LÀ ?",
-  "description": "Avant d'y aller, regarde LÀ.",
+  "name": "La plage youpiii",
+  "short_name": "La plage youpiii",
+  "description": "Quelle plage choisir à Cannes maintenant ?",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#06101d",
