@@ -3,103 +3,88 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#07111f" />
-  <meta name="description" content="LÀ ? — Avant d'y aller, regarde LÀ. Découvre l'état des plages autour de toi maintenant." />
+  <meta name="theme-color" content="#041926" />
+  <meta name="description" content="LÀ ? — Trouve les meilleures plages autour de toi avec données officielles, météo et mer." />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://api.open-meteo.com" />
+  <link rel="preconnect" href="https://marine-api.open-meteo.com" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
   <link rel="stylesheet" href="/styles.css" />
-  <title>LÀ ? — Est-ce que j'y vais maintenant ?</title>
+  <title>LÀ ? — La plage maintenant</title>
 </head>
 <body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
   <div class="app-shell">
-    <header class="topbar">
-      <div class="brand-wrap">
-        <div class="logo">LÀ<span>?</span></div>
-        <div class="tagline">Avant d'y aller, regarde LÀ.</div>
-      </div>
-      <button id="locateBtn" class="ghost-btn" aria-label="Me géolocaliser">⌖ <span>Autour de moi</span></button>
+    <header class="topbar" id="top">
+      <a class="brand" href="#top" aria-label="Accueil LÀ ?"><span class="brand-word">LÀ</span><span class="brand-q">?</span></a>
+      <div class="live-badge"><span></span>Données traçables</div>
     </header>
 
     <main>
       <section class="hero">
-        <div class="eyebrow"><span class="live-dot"></span> CONDITIONS EN DIRECT</div>
-        <h1>Où aller<br><span>maintenant ?</span></h1>
-        <p id="locationStatus">Recherche des meilleurs spots autour de toi…</p>
+        <div class="hero-copy">
+          <div class="kicker">CÔTE D’AZUR D’ABORD · FRANCE ENTIÈRE</div>
+          <h1>La bonne plage.<br><em>Maintenant.</em></h1>
+          <p>Pas de faux “temps réel”. On assemble les données officielles, la météo, la mer et les preuves disponibles autour de chaque spot.</p>
+        </div>
+
+        <div class="search-card">
+          <div class="search-row">
+            <div class="search-box">
+              <span class="search-icon">⌕</span>
+              <input id="addressInput" autocomplete="off" inputmode="search" placeholder="Une adresse, un lieu… ex. Croisette Cannes" aria-label="Rechercher une adresse" />
+              <button id="clearSearch" class="icon-btn hidden" aria-label="Effacer">×</button>
+              <div id="suggestions" class="suggestions hidden" role="listbox"></div>
+            </div>
+            <button id="locateBtn" class="locate-btn"><span>⌖</span><b>Autour de moi</b></button>
+          </div>
+          <div id="locationLine" class="location-line"><span class="pulse"></span>Choisis une adresse ou utilise ta position.</div>
+        </div>
       </section>
 
-      <section class="filters" aria-label="Filtres">
-        <button class="filter active" data-filter="all">Tout</button>
-        <button class="filter" data-filter="calm">🟢 Tranquille</button>
-        <button class="filter" data-filter="family">👨‍👩‍👧 Famille</button>
-        <button class="filter" data-filter="parking">🚗 Parking</button>
+      <section class="trust-strip" aria-label="Sources de données">
+        <div><b>🇫🇷 Officiel</b><span>Qualité baignade</span></div>
+        <div><b>🌊 Modèles mer</b><span>Météo-France & autres</span></div>
+        <div><b>☀️ Conditions</b><span>Open-Meteo</span></div>
+        <div><b>🛰️ Vue aérienne</b><span>IGN</span></div>
+      </section>
+
+      <section class="section-head">
+        <div><span class="eyebrow">AUTOUR DE TOI</span><h2 id="resultsTitle">Plages à découvrir</h2></div>
+        <div class="controls">
+          <select id="radiusSelect" aria-label="Rayon">
+            <option value="10">10 km</option><option value="25" selected>25 km</option><option value="50">50 km</option><option value="150">150 km</option>
+          </select>
+          <button id="refreshBtn" class="soft-btn">↻ Actualiser</button>
+        </div>
+      </section>
+
+      <section id="sourceState" class="source-state loading">
+        <span class="spinner"></span><div><b>Chargement de la base nationale des baignades…</b><small>Plus de 3 000 sites surveillés en France.</small></div>
       </section>
 
       <section id="spots" class="spots" aria-live="polite"></section>
+      <button id="showMore" class="show-more hidden">Afficher plus de plages</button>
 
-      <section class="community-card">
-        <div>
-          <div class="eyebrow">COMMUNAUTÉ</div>
-          <h2>Tu es sur place ?</h2>
-          <p>30 secondes suffisent pour aider les personnes qui hésitent à venir.</p>
-        </div>
-        <button id="reportGlobalBtn" class="primary-btn">+ Signaler maintenant</button>
+      <section class="method-card">
+        <div class="method-mark">✓</div>
+        <div><span class="eyebrow">NO FAKE DATA</span><h3>Une donnée absente reste absente.</h3><p>Affluence et places libres ne sont affichées comme “live” que si une source réellement mesurée est disponible. Sinon, l’app l’indique clairement au lieu d’inventer un niveau.</p></div>
       </section>
     </main>
-
-    <nav class="bottom-nav" aria-label="Navigation principale">
-      <button class="nav-item active" data-scroll="top"><span>⌂</span>Explorer</button>
-      <button class="nav-item" id="navReport"><span>＋</span>Signaler</button>
-      <button class="nav-item" id="navShare"><span>↗</span>Partager</button>
-    </nav>
   </div>
 
   <div id="detailSheet" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
-    <div class="sheet-backdrop" data-close-sheet></div>
-    <div class="sheet-panel">
+    <div class="sheet-backdrop" data-close-detail></div>
+    <div class="sheet-panel detail-panel">
       <div class="sheet-handle"></div>
-      <button class="sheet-close" data-close-sheet aria-label="Fermer">×</button>
+      <button class="sheet-close" data-close-detail aria-label="Fermer">×</button>
       <div id="detailContent"></div>
     </div>
   </div>
 
-  <div id="reportSheet" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
-    <div class="sheet-backdrop" data-close-report></div>
-    <div class="sheet-panel report-panel">
-      <div class="sheet-handle"></div>
-      <button class="sheet-close" data-close-report aria-label="Fermer">×</button>
-      <div class="eyebrow">SIGNALER EN 30 SECONDES</div>
-      <h2 id="reportTitle">Comment c'est maintenant ?</h2>
-      <p id="reportSpotName" class="muted"></p>
-      <div class="report-block">
-        <label>Affluence</label>
-        <div class="segmented" data-group="crowd">
-          <button data-value="calm">😌 Calme</button>
-          <button data-value="normal">🙂 Normal</button>
-          <button data-value="busy">😵 Blindé</button>
-        </div>
-      </div>
-      <div class="report-block">
-        <label>Parking</label>
-        <div class="segmented" data-group="parking">
-          <button data-value="easy">✅ Facile</button>
-          <button data-value="medium">🟠 Moyen</button>
-          <button data-value="hard">🔴 Galère</button>
-        </div>
-      </div>
-      <div class="report-block">
-        <label>Méduses</label>
-        <div class="segmented" data-group="jellyfish">
-          <button data-value="no">👍 RAS</button>
-          <button data-value="yes">🪼 Oui</button>
-        </div>
-      </div>
-      <button id="submitReport" class="primary-btn full" disabled>Publier mon signalement</button>
-      <p class="microcopy">MVP : les signalements sont stockés sur cet appareil. La base communautaire partagée arrive ensuite.</p>
-    </div>
-  </div>
-
-  <div id="toast" class="toast" role="status"></div>
-  <script src="/geo-fix.js"></script>
+  <div id="toast" class="toast"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="/app.js" defer></script>
 </body>
 </html>
