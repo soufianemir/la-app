@@ -4,11 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#041926" />
-  <meta name="description" content="LÀ ? — Trouve les meilleures plages autour de toi avec données officielles, météo, mer et parkings." />
+  <meta name="description" content="LÀ ? — Trouve les meilleures plages autour de toi avec données officielles, météo, mer, affluence visuelle live et parkings." />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="/v7.css?v=7" />
+  <link rel="stylesheet" href="/v9-realtime.css?v=9" />
   <title>LÀ ? — Est-ce que j’y vais maintenant ?</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
     </header>
     <main>
       <section class="hero">
-        <div class="hero-copy"><div class="kicker">CÔTE D’AZUR · V1</div><h1>La bonne plage.<br><em>Maintenant.</em></h1><p>Une adresse suffit. Le GPS n’est jamais obligatoire. Les données manquantes restent affichées comme indisponibles.</p></div>
+        <div class="hero-copy"><div class="kicker">CÔTE D’AZUR · TEMPS RÉEL</div><h1>La bonne plage.<br><em>Maintenant.</em></h1><p>Adresse, météo, mer, affluence visuelle et parking. Les chiffres « live » ne sont affichés que lorsqu’une source réelle les fournit.</p></div>
         <div class="search-card">
           <div class="search-row v7-search-row">
             <div class="search-box"><span class="search-icon">⌕</span><input id="addressInput" autocomplete="off" inputmode="search" placeholder="Adresse ou lieu… ex. Croisette, Cannes" aria-label="Rechercher une adresse" /><button id="clearSearch" class="icon-btn hidden" aria-label="Effacer">×</button><div id="suggestions" class="suggestions hidden" role="listbox"></div></div>
@@ -30,16 +31,17 @@
           <div id="locationLine" class="location-line"><span class="pulse"></span>Choisis une adresse ou utilise « Autour de moi ».</div>
         </div>
       </section>
-      <section class="trust-strip"><div><b>🇫🇷 Officiel</b><span>Qualité baignade</span></div><div><b>🌊 Mer</b><span>Modèles actuels</span></div><div><b>☀️ Conditions</b><span>Météo actuelle</span></div><div><b>🅿️ Parking</b><span>Live seulement si mesuré</span></div></section>
+      <section class="trust-strip"><div><b>🇫🇷 Officiel</b><span>Qualité baignade</span></div><div><b>🌊 Mer</b><span>Modèles actuels</span></div><div><b>📹 Affluence</b><span>Caméras live à Cannes</span></div><div><b>🅿️ Parking</b><span>Libres seulement si mesuré</span></div></section>
       <section class="section-head"><div><span class="eyebrow">AUTOUR DU POINT CHOISI</span><h2 id="resultsTitle">Plages proches</h2></div><div class="controls"><select id="radiusSelect" aria-label="Rayon"><option value="5">5 km</option><option value="10" selected>10 km</option><option value="25">25 km</option><option value="50">50 km</option></select><button id="refreshBtn" class="soft-btn">↻ Actualiser</button></div></section>
       <section id="sourceState" class="source-state"><div>✓</div><div><b>Catalogue Côte d’Azur prêt</b><small>Aucune permission GPS requise pour commencer.</small></div></section>
       <section id="spots" class="spots" aria-live="polite"></section>
-      <section class="method-card"><div class="method-mark">✓</div><div><span class="eyebrow">NO FAKE DATA</span><h3>Une donnée absente reste absente.</h3><p>Le score n’utilise que les signaux réellement disponibles. Les places libres ne sont affichées que lorsqu’un flux officiel les fournit.</p></div></section>
+      <section class="method-card"><div class="method-mark">✓</div><div><span class="eyebrow">NO FAKE DATA</span><h3>Une donnée absente reste absente.</h3><p>Caméra = preuve visuelle live. Capacité parking ≠ places libres. Le score exclut les critères non mesurés au lieu d’inventer une valeur.</p></div></section>
     </main>
   </div>
   <div id="detailSheet" class="sheet hidden" role="dialog" aria-modal="true"><div class="sheet-backdrop" data-close-detail></div><div class="sheet-panel"><div class="sheet-handle"></div><button class="sheet-close" data-close-detail aria-label="Fermer">×</button><div id="detailContent"></div></div></div>
   <div id="toast" class="toast" role="status"></div>
   <script src="/app-v7.js?v=7" defer></script>
   <script src="/v7-fast.js?v=7" defer></script>
+  <script src="/v9-realtime.js?v=9" defer></script>
 </body>
 </html>
