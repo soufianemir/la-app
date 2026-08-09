@@ -8,11 +8,12 @@ const files = [
   'v11-cannes.css',
   'v12-crowd.css',
   'v13-clarity.css',
+  'v16.css',
   'app-v10.js',
   'v11-cannes.js',
   'v12-crowd.js',
-  'v13-clarity.js',
   'v14-cannes-only.js',
+  'v16-ui.js',
   'manifest.webmanifest',
   'icon.svg',
   'sw.js'
@@ -28,4 +29,4 @@ for (const file of files) {
   fs.copyFileSync(src, path.join(out, file));
 }
 
-console.log(`La plage youpiii: copied ${files.length} frontend files to dist/`);
+console.log(`La plage youpiii V16: copied ${files.length} frontend files to dist/`);

@@ -3,8 +3,7 @@
   "version": 2,
   "builds": [
     { "src": "api/webcam-snapshot.js", "use": "@vercel/node" },
-    { "src": "home.html", "use": "@vercel/static" },
-    { "src": "probe.html", "use": "@vercel/static" },
+    { "src": "index.html", "use": "@vercel/static" },
     { "src": "*.css", "use": "@vercel/static" },
     { "src": "app-v10.js", "use": "@vercel/static" },
     { "src": "v11-cannes.js", "use": "@vercel/static" },
@@ -16,16 +15,22 @@
     { "src": "icon.svg", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/", "dest": "/home.html" },
-    { "src": "/index.html", "dest": "/home.html" },
     { "src": "/api/webcam-snapshot", "dest": "/api/webcam-snapshot.js" },
+    { "src": "/", "dest": "/index.html" },
     { "handle": "filesystem" }
   ],
   "headers": [
     {
-      "source": "/home.html",
+      "source": "/index.html",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/sw.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
+        { "key": "Service-Worker-Allowed", "value": "/" }
       ]
     },
     {
