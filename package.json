@@ -1,0 +1,8 @@
+{
+  "name": "la-plage-youpiii",
+  "version": "0.14.1",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  }
+}
