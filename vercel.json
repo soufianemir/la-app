@@ -1,7 +1,10 @@
 {
-  "cleanUrls": true,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": false,
   "functions": {
-    "api/webcam-snapshot.js": {
+    "api/**/*.js": {
       "maxDuration": 10
     }
   },
@@ -25,5 +28,8 @@
         {"key": "Cache-Control", "value": "public, max-age=300, must-revalidate"}
       ]
     }
+  ],
+  "rewrites": [
+    {"source": "/", "destination": "/index.html"}
   ]
 }
