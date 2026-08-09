@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <meta name="theme-color" content="#041926"/>
   <meta name="description" content="La plage youpiii — Cannes : plages, affluence claire, sécurité baignade, photos, météo, mer et parkings."/>
-  <style>html,body{margin:0;min-height:100%;background:#03141e;color:#eaf9ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}</style>
+  <style>html,body{margin:0;min-height:100%;background:#03141e;color:#eaf9ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.boot-badge{position:fixed;left:12px;bottom:12px;z-index:99999;background:#0b3140;color:#bdf8d8;border:1px solid #1d5969;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:800}</style>
   <link rel="manifest" href="/manifest.webmanifest"/>
   <link rel="icon" href="/icon.svg" type="image/svg+xml"/>
   <link rel="stylesheet" href="/styles.css"/>
@@ -16,6 +16,7 @@
   <title>La plage youpiii — Cannes</title>
 </head>
 <body>
+  <div class="boot-badge">V15 · interface sûre</div>
   <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
   <div class="app-shell">
     <header class="topbar" id="top"><a class="brand" href="#top" aria-label="Accueil La plage youpiii"><span class="brand-word">La plage</span><span class="brand-q"> youpiii</span></a><div class="live-badge"><span></span>Cannes · maintenant</div></header>
@@ -33,13 +34,7 @@
   <script src="/app-v10.js?v=10" defer></script>
   <script src="/v11-cannes.js?v=11" defer></script>
   <script src="/v12-crowd.js?v=12" defer></script>
-  <script src="/v13-clarity.js?v=13" defer></script>
+  <script src="/v15-safe-ui.js?v=15" defer></script>
   <script src="/v14-cannes-only.js?v=14" defer></script>
-  <script>
-    window.addEventListener('error', function(e){
-      if(e && e.target && (e.target.src || e.target.href)) console.error('Asset failed', e.target.src || e.target.href);
-    }, true);
-    if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
-  </script>
 </body>
 </html>
