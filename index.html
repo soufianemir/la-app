@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <meta name="theme-color" content="#041926"/>
   <meta name="description" content="La plage youpiii — Cannes : plages, affluence claire, sécurité baignade, photos, météo, mer et parkings."/>
+  <style>html,body{margin:0;min-height:100%;background:#03141e;color:#eaf9ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}</style>
   <link rel="manifest" href="/manifest.webmanifest"/>
   <link rel="icon" href="/icon.svg" type="image/svg+xml"/>
   <link rel="stylesheet" href="/styles.css"/>
@@ -12,6 +13,7 @@
   <link rel="stylesheet" href="/v11-cannes.css?v=11"/>
   <link rel="stylesheet" href="/v12-crowd.css?v=12"/>
   <link rel="stylesheet" href="/v13-clarity.css?v=13"/>
+  <link rel="stylesheet" href="/v16.css?v=16"/>
   <title>La plage youpiii — Cannes</title>
 </head>
 <body>
@@ -32,8 +34,8 @@
   <script src="/app-v10.js?v=10" defer></script>
   <script src="/v11-cannes.js?v=11" defer></script>
   <script src="/v12-crowd.js?v=12" defer></script>
-  <script src="/v13-clarity.js?v=13" defer></script>
   <script src="/v14-cannes-only.js?v=14" defer></script>
+  <script src="/v16-ui.js?v=16" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
