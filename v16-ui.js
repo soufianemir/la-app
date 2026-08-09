@@ -46,7 +46,7 @@
   }
   function polishCards(){document.querySelectorAll('.spot-card').forEach(cardCrowd);}
   function refreshUi(){polishCards();polishCrowdPanel(document);}
-  function burst(){refreshUi();setTimeout(refreshUi,350);setTimeout(refreshUi,1300);}
+  function burst(){refreshUi();[350,1300,3500,7000].forEach(ms=>setTimeout(refreshUi,ms));}
 
   function cannesClock(){
     const p=Object.fromEntries(new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',year:'numeric',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date()).filter(x=>x.type!=='literal').map(x=>[x.type,Number(x.value)]));
