@@ -9,8 +9,8 @@
     { "src": "app-v10.js", "use": "@vercel/static" },
     { "src": "v11-cannes.js", "use": "@vercel/static" },
     { "src": "v12-crowd.js", "use": "@vercel/static" },
-    { "src": "v15-safe-ui.js", "use": "@vercel/static" },
     { "src": "v14-cannes-only.js", "use": "@vercel/static" },
+    { "src": "v16-ui.js", "use": "@vercel/static" },
     { "src": "sw.js", "use": "@vercel/static" },
     { "src": "manifest.webmanifest", "use": "@vercel/static" },
     { "src": "icon.svg", "use": "@vercel/static" }
@@ -23,14 +23,19 @@
   ],
   "headers": [
     {
-      "source": "/sw.js",
+      "source": "/home.html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
-        { "key": "Service-Worker-Allowed", "value": "/" }
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
-      "source": "/home.html",
+      "source": "/v16-ui.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/v16.css",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
